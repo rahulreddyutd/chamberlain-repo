@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Access Portfolio — PM Case Studies</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --white: #f5f2ee;
+      --cream: #ede8e0;
+      --orange: #e05a2b;
+      --orange-light: #f07348;
+      --slate: #2a2e35;
+      --muted: #7a7670;
+      --border: #d0cbc2;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 3rem;
+      background: rgba(245, 242, 238, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      color: var(--orange);
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      color: var(--slate);
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--orange); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 80px;
+    }
+
+    .hero-left {
+      padding: 8rem 3rem 5rem 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-right: 1px solid var(--border);
+    }
+
+    .hero-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      color: var(--orange);
+      text-transform: uppercase;
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3rem, 5vw, 5.2rem);
+      line-height: 1.04;
+      color: var(--black);
+      margin-bottom: 2rem;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--orange);
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 3rem;
+      line-height: 1.75;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: var(--orange);
+      color: var(--white);
+      padding: 0.85rem 1.8rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .hero-cta:hover { background: var(--orange-light); }
+
+    .hero-right {
+      padding: 5rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border: 1px solid var(--border);
+    }
+
+    .stat-box {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stat-box:nth-child(even) { border-right: none; }
+    .stat-box:nth-child(3), .stat-box:nth-child(4) { border-bottom: none; }
+
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.8rem;
+      color: var(--orange);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* INDEX BAR */
+    .index-bar {
+      background: var(--black);
+      padding: 1.4rem 3.5rem;
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .index-bar-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .index-items {
+      display: flex;
+      gap: 0;
+      flex: 1;
+    }
+
+    .index-item {
+      flex: 1;
+      padding: 0.5rem 1.5rem;
+      border-left: 1px solid #2a2a2a;
+      color: var(--cream);
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .index-item:hover { color: var(--orange); }
+
+    .index-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--orange);
+    }
+
+    /* SECTION SHARED */
+    section { position: relative; }
+
+    .section-header {
+      padding: 5rem 3.5rem 3rem;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 3rem;
+      align-items: end;
+    }
+
+    .project-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 7rem;
+      line-height: 1;
+      color: var(--cream);
+      user-select: none;
+    }
+
+    .section-meta { padding-bottom: 0.5rem; }
+
+    .section-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--orange);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3.2rem);
+      line-height: 1.1;
+    }
+
+    .section-subtitle {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-top: 0.6rem;
+    }
+
+    /* TWO-COL CONTENT */
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .content-col {
+      padding: 3.5rem;
+      border-right: 1px solid var(--border);
+    }
+
+    .content-col:last-child { border-right: none; }
+
+    .col-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      color: var(--orange);
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .col-label::after {
+      content: '';
+      display: block;
+      height: 1px;
+      width: 40px;
+      background: var(--orange);
+      opacity: 0.4;
+    }
+
+    .col-heading {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      line-height: 1.25;
+    }
+
+    .col-text {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    /* FEATURE LIST */
+    .feature-list {
+      list-style: none;
+      margin-top: 1.5rem;
+    }
+
+    .feature-list li {
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: var(--slate);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      line-height: 1.5;
+    }
+
+    .feature-list li:last-child { border-bottom: none; }
+
+    .feat-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--orange);
+      margin-top: 0.45rem;
+      flex-shrink: 0;
+    }
+
+    /* KPI STRIP */
+    .kpi-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .kpi-cell {
+      padding: 2rem 2.5rem;
+      border-right: 1px solid var(--border);
+    }
+
+    .kpi-cell:last-child { border-right: none; }
+
+    .kpi-metric {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      color: var(--orange);
+      margin-bottom: 0.3rem;
+    }
+
+    .kpi-name {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* DELIVERABLES ROW */
+    .deliverables {
+      display: flex;
+      gap: 0;
+      padding: 2.5rem 3.5rem;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+    }
+
+    .deliverables-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-right: 2rem;
+      white-space: nowrap;
+    }
+
+    .deliverable-tag {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      padding: 0.4rem 1rem;
+      font-size: 0.78rem;
+      color: var(--slate);
+      margin-right: 0.5rem;
+      margin-bottom: 0.4rem;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    /* Deliverables card grid — Project 3 dark section */
+    .deliverables-dark {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+      background: #1e1e1e;
+    }
+
+    .deliverables-dark-header {
+      grid-column: 1 / -1;
+      padding: 1.8rem 3.5rem 1.2rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--orange);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      background: var(--black);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 1px solid #1e1e1e;
+    }
+
+    .deliverables-dark-header::after {
+      content: '';
+      display: block;
+      height: 1px;
+      width: 40px;
+      background: var(--orange);
+      opacity: 0.4;
+    }
+
+    .deliverable-card {
+      background: var(--black);
+      padding: 2.2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      transition: background 0.2s;
+    }
+
+    .deliverable-card:hover { background: #111; }
+
+    .deliverable-card-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .deliverable-card-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.05rem;
+      color: var(--white);
+      line-height: 1.25;
+    }
+
+    .deliverable-card-desc {
+      font-size: 0.74rem;
+      color: #555;
+      line-height: 1.6;
+      margin-top: 0.2rem;
+    }
+
+    /* PRICING TABLE */
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .pricing-table th {
+      text-align: left;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0.75rem 1rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .pricing-table td {
+      padding: 1.1rem 1rem;
+      font-size: 0.88rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .pricing-table tr:last-child td { border-bottom: none; }
+
+    .bundle-name {
+      font-weight: 600;
+      color: var(--black);
+    }
+
+    .bundle-price {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      color: var(--orange);
+    }
+
+    .tier-badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.65rem;
+      font-family: 'IBM Plex Mono', monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .tier-basic { background: #e8e4de; color: #5a5550; }
+    .tier-mid { background: #fde8dc; color: var(--orange); }
+    .tier-pro { background: var(--orange); color: white; }
+    .tier-ent { background: var(--black); color: white; }
+
+    /* JOURNEY STEPS */
+    .journey {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .journey-step {
+      padding: 2.5rem 2rem;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+
+    .journey-step:last-child { border-right: none; }
+
+    .step-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--orange);
+      letter-spacing: 0.14em;
+      margin-bottom: 1rem;
+    }
+
+    .step-icon {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .step-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .step-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .step-arrow {
+      position: absolute;
+      top: 50%;
+      right: -12px;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      background: var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      font-size: 0.65rem;
+      color: white;
+    }
+
+    .journey-step:last-child .step-arrow { display: none; }
+
+    /* DASHBOARD MOCKUP */
+    .dashboard-mockup {
+      background: var(--slate);
+      border-radius: 0;
+      padding: 1.5rem;
+      position: relative;
+    }
+
+    .dash-topbar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #3a3e45;
+    }
+
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot-r { background: #e05a5a; }
+    .dot-y { background: #e0bc5a; }
+    .dot-g { background: #5ae07a; }
+
+    .dash-title { font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; color: #7a7e85; margin-left: auto; }
+
+    .dash-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .dash-card {
+      background: #333740;
+      padding: 1rem;
+      border-radius: 2px;
+    }
+
+    .dash-card-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.55rem; color: #7a7e85; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+    .dash-card-val { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: #f5f2ee; }
+    .dash-card-sub { font-size: 0.65rem; color: #5ae07a; margin-top: 0.2rem; }
+    .dash-card-sub.warn { color: #e0bc5a; }
+    .dash-card-sub.bad { color: #e05a5a; }
+
+    .dash-bar-wrap { grid-column: 1 / -1; background: #333740; padding: 1rem; border-radius: 2px; }
+    .dash-bar-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.55rem; color: #7a7e85; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+    .dash-bars { display: flex; gap: 0.3rem; align-items: flex-end; height: 50px; }
+    .dash-bar { flex: 1; background: var(--orange); opacity: 0.7; border-radius: 1px; transition: opacity 0.2s; }
+    .dash-bar:hover { opacity: 1; }
+    .dash-bar.hi { opacity: 1; }
+
+    /* WIREFRAME MOCKUP */
+    .wireframe {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      padding: 1.2rem;
+    }
+
+    .wf-header {
+      background: var(--black);
+      padding: 0.6rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .wf-logo-block { width: 70px; height: 10px; background: var(--orange); }
+    .wf-nav-items { display: flex; gap: 0.4rem; margin-left: auto; }
+    .wf-nav-item { width: 40px; height: 6px; background: #3a3a3a; border-radius: 2px; }
+
+    .wf-body { display: grid; grid-template-columns: 200px 1fr; gap: 0.75rem; }
+
+    .wf-sidebar { display: flex; flex-direction: column; gap: 0.4rem; }
+    .wf-side-item { padding: 0.5rem 0.7rem; background: white; border: 1px solid var(--border); font-size: 0.65rem; color: var(--muted); font-family: 'IBM Plex Mono', monospace; display: flex; align-items: center; gap: 0.4rem; }
+    .wf-side-item.active { background: var(--orange); color: white; border-color: var(--orange); }
+    .wf-side-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: 0.5; }
+
+    .wf-main { display: flex; flex-direction: column; gap: 0.6rem; }
+
+    .wf-device-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+
+    .wf-device {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 0.75rem;
+    }
+
+    .wf-device-top { display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.5rem; }
+    .wf-device-icon { width: 20px; height: 20px; background: var(--cream); border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.55rem; }
+    .wf-device-name { font-size: 0.6rem; font-family: 'IBM Plex Mono', monospace; color: var(--slate); }
+    .wf-status-pill { font-size: 0.5rem; background: #d4f5dd; color: #1a7a35; padding: 0.1rem 0.4rem; border-radius: 20px; margin-left: auto; font-family: 'IBM Plex Mono', monospace; }
+    .wf-status-pill.warn { background: #fdf3d4; color: #7a5a00; }
+
+    .wf-score-bar { height: 4px; background: var(--cream); border-radius: 2px; overflow: hidden; margin-bottom: 0.3rem; }
+    .wf-score-fill { height: 100%; background: var(--orange); border-radius: 2px; }
+    .wf-score-label { font-size: 0.55rem; color: var(--muted); font-family: 'IBM Plex Mono', monospace; }
+
+    .wf-timeline {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 0.75rem;
+    }
+
+    .wf-tl-label { font-size: 0.58rem; font-family: 'IBM Plex Mono', monospace; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+    .wf-tl-items { display: flex; flex-direction: column; gap: 0.3rem; }
+    .wf-tl-item { display: flex; gap: 0.5rem; align-items: flex-start; font-size: 0.6rem; color: var(--slate); }
+    .wf-tl-time { color: var(--muted); font-family: 'IBM Plex Mono', monospace; white-space: nowrap; }
+    .wf-tl-dot2 { width: 5px; height: 5px; border-radius: 50%; background: var(--orange); margin-top: 0.2rem; flex-shrink: 0; }
+
+    /* STRATEGY BLOCKS */
+    .strategy-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .strategy-block {
+      padding: 3rem 2.5rem;
+      border-right: 1px solid var(--border);
+    }
+
+    .strategy-block:last-child { border-right: none; }
+
+    .strategy-num {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--orange);
+      letter-spacing: 0.14em;
+      margin-bottom: 1.2rem;
+    }
+
+    .strategy-heading {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .strategy-text {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--black);
+      padding: 4rem 3.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .footer-left {}
+
+    .footer-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.8rem;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-tagline {
+      font-size: 0.85rem;
+      color: #555;
+      max-width: 380px;
+      line-height: 1.7;
+    }
+
+    .footer-right {
+      text-align: right;
+    }
+
+    .footer-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem;
+      color: #555;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-note {
+      font-size: 0.82rem;
+      color: #444;
+    }
+
+    /* SECTION DIVIDER */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0;
+    }
+
+    /* ALT BG */
+    .alt-bg { background: var(--black); }
+    .alt-bg .section-header { border-color: #2a2a2a; }
+    .alt-bg .project-num { color: #1a1a1a; }
+    .alt-bg .section-title { color: var(--white); }
+    .alt-bg .section-subtitle { color: #555; }
+    .alt-bg .content-grid { border-color: #2a2a2a; }
+    .alt-bg .content-col { border-color: #2a2a2a; }
+    .alt-bg .col-heading { color: var(--white); }
+    .alt-bg .col-text { color: #666; }
+    .alt-bg .feature-list li { border-color: #2a2a2a; color: #aaa; }
+    .alt-bg .kpi-strip { border-color: #2a2a2a; }
+    .alt-bg .kpi-cell { border-color: #2a2a2a; }
+    .alt-bg .kpi-name { color: #555; }
+    .alt-bg .deliverables { border-color: #2a2a2a; }
+    .alt-bg .deliverable-tag { background: #1a1a1a; border-color: #2a2a2a; color: #888; }
+    .alt-bg .journey { border-color: #2a2a2a; }
+    .alt-bg .journey-step { border-color: #2a2a2a; }
+    .alt-bg .step-title { color: var(--white); }
+    .alt-bg .step-desc { color: #555; }
+    .alt-bg .strategy-grid { border-color: #2a2a2a; }
+    .alt-bg .strategy-block { border-color: #2a2a2a; }
+    .alt-bg .strategy-heading { color: var(--white); }
+    .alt-bg .wireframe { background: #1a1a1a; border-color: #2a2a2a; }
+    .alt-bg .wf-side-item { background: #1e1e1e; border-color: #2a2a2a; }
+    .alt-bg .wf-device { background: #1e1e1e; border-color: #2a2a2a; }
+    .alt-bg .wf-timeline { background: #1e1e1e; border-color: #2a2a2a; }
+    .alt-bg .pricing-table th { border-color: #2a2a2a; color: #555; }
+    .alt-bg .pricing-table td { border-color: #2a2a2a; color: #888; }
+    .alt-bg .bundle-name { color: var(--white); }
+    .alt-bg .col-label::after { opacity: 0.3; }
+    .alt-bg .wf-score-bar { background: #2a2a2a; }
+    .alt-bg .wf-device-icon { background: #2a2a2a; border-color: #3a3a3a; }
+    .alt-bg .wf-device-name { color: #aaa; }
+    .alt-bg .wf-score-label { color: #555; }
+    .alt-bg .wf-tl-item { color: #888; }
+    .alt-bg .wf-tl-label { color: #444; }
+
+    /* SCROLL FADE */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .section-header { grid-template-columns: 1fr; gap: 1rem; }
+      .project-num { font-size: 4rem; }
+      .content-grid { grid-template-columns: 1fr; }
+      .content-col { border-right: none; }
+      .kpi-strip { grid-template-columns: 1fr 1fr; }
+      .kpi-cell:nth-child(2) { border-right: none; }
+      .kpi-cell { border-bottom: 1px solid var(--border); }
+      .journey { grid-template-columns: 1fr; }
+      .journey-step { border-right: none; }
+      .step-arrow { display: none; }
+      .strategy-grid { grid-template-columns: 1fr; }
+      .strategy-block { border-right: none; }
+      .dash-grid { grid-template-columns: 1fr 1fr; }
+      .wf-body { grid-template-columns: 1fr; }
+      .wf-device-row { grid-template-columns: 1fr 1fr; }
+      footer { grid-template-columns: 1fr; }
+      .footer-right { text-align: left; }
+      .index-items { flex-direction: column; gap: 0.3rem; }
+      .index-bar { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .pricing-table { font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Smart Access PM Portfolio</div>
+    <ul class="nav-links">
+      <li><a href="#project-1">Predictive Maintenance</a></li>
+      <li><a href="#project-2">Pricing Strategy</a></li>
+      <li><a href="#project-3">Unified Dashboard</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Product Management Case Studies</div>
+      <h1 class="hero-title">Building the<br /><em>future</em> of smart<br />access at home.</h1>
+      <p class="hero-desc">Three product case studies covering predictive maintenance, pricing strategy, and unified UX design for a connected garage and home access ecosystem.</p>
+      <a href="#project-1" class="hero-cta">View Case Studies ↓</a>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stats">
+        <div class="stat-box">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Product Domains</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">15+</div>
+          <div class="stat-label">Deliverable Types</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">AI</div>
+          <div class="stat-label">Core Technology Layer</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">IoT</div>
+          <div class="stat-label">Connected Hardware Focus</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDEX BAR -->
+  <div class="index-bar">
+    <span class="index-bar-label">Contents</span>
+    <div class="index-items">
+      <a href="#project-1" class="index-item"><span class="index-num">01</span> Predictive Maintenance</a>
+      <a href="#project-2" class="index-item"><span class="index-num">02</span> Pricing & Bundling</a>
+      <a href="#project-3" class="index-item"><span class="index-num">03</span> Unified Dashboard</a>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════
+       PROJECT 1 — PREDICTIVE MAINTENANCE
+  ══════════════════════════════════════════ -->
+  <section id="project-1">
+
+    <div class="section-header fade-in">
+      <div class="project-num">01</div>
+      <div class="section-meta">
+        <div class="section-tag">AI + Connected Hardware · Mobile App Feature</div>
+        <h2 class="section-title">Smart Garage Predictive<br />Maintenance</h2>
+        <p class="section-subtitle">Catch failures before they happen. Keep customers safe, satisfied, and subscribed.</p>
+      </div>
+    </div>
+
+    <!-- Problem + Strategy -->
+    <div class="content-grid fade-in">
+      <div class="content-col">
+        <div class="col-label">Problem</div>
+        <h3 class="col-heading">Garage doors fail without warning — and that's a trust problem.</h3>
+        <p class="col-text">A garage door is one of the most frequently used mechanical systems in a home, cycling hundreds of times each year. Motor brushes degrade. Sensors drift out of alignment. Springs weaken under load. Yet most smart garage platforms treat the hardware like a dumb relay — open or closed — and only respond once something breaks. Customers experience expensive service calls, security gaps, and frustration directed squarely at the brand. The first company to get ahead of that moment wins loyalty and recurring revenue.</p>
+      </div>
+      <div class="content-col">
+        <div class="col-label">Product Vision</div>
+        <h3 class="col-heading">Turn sensor data into a health score that works on behalf of the customer.</h3>
+        <p class="col-text">Every actuation of a myQ-connected garage door generates signals: motor current draw, vibration signature, open/close duration, and sensor confirmation latency. Baseline those signals per unit and over a fleet of millions, and anomalies become meaningful early warnings. The product vision is an intelligent maintenance layer living inside the existing mobile app — no new hardware required — that surfaces a device health score, explains what's degrading in plain language, and connects users to a vetted service partner before failure ever happens.</p>
+      </div>
+    </div>
+
+    <!-- Features -->
+    <div class="content-grid fade-in">
+      <div class="content-col">
+        <div class="col-label">Key Features</div>
+        <h3 class="col-heading">What we build</h3>
+        <ul class="feature-list">
+          <li><span class="feat-dot"></span>Vibration and motor current anomaly detection using on-device baseline models, updated over the air as the fleet grows.</li>
+          <li><span class="feat-dot"></span>Component failure probability score shown as a simple health dial — not a wall of telemetry data — in the main app home screen.</li>
+          <li><span class="feat-dot"></span>Contextual push notifications triggered at meaningful thresholds: "Your motor is showing early wear. Schedule a check before summer heat peaks."</li>
+          <li><span class="feat-dot"></span>In-app service marketplace with vetted technicians, real-time availability, and transparent pricing. Revenue share unlocks a new stream.</li>
+          <li><span class="feat-dot"></span>Maintenance history log so homeowners have documentation when they sell the property — a real, underserved pain point.</li>
+        </ul>
+      </div>
+      <div class="content-col">
+        <div class="col-label">Device Health Dashboard — Concept</div>
+        <div class="dashboard-mockup">
+          <div class="dash-topbar">
+            <span class="dot dot-r"></span>
+            <span class="dot dot-y"></span>
+            <span class="dot dot-g"></span>
+            <span class="dash-title">myQ Health Monitor</span>
+          </div>
+          <div class="dash-grid">
+            <div class="dash-card">
+              <div class="dash-card-label">Health Score</div>
+              <div class="dash-card-val">84</div>
+              <div class="dash-card-sub">↑ Good condition</div>
+            </div>
+            <div class="dash-card">
+              <div class="dash-card-label">Motor Wear</div>
+              <div class="dash-card-val">62%</div>
+              <div class="dash-card-sub warn">⚠ Watch in 30d</div>
+            </div>
+            <div class="dash-card">
+              <div class="dash-card-label">Cycles / Month</div>
+              <div class="dash-card-val">248</div>
+              <div class="dash-card-sub">Normal range</div>
+            </div>
+            <div class="dash-card">
+              <div class="dash-card-label">Sensor Align</div>
+              <div class="dash-card-val">OK</div>
+              <div class="dash-card-sub">Last: 2h ago</div>
+            </div>
+            <div class="dash-card">
+              <div class="dash-card-label">Spring Tension</div>
+              <div class="dash-card-val">91%</div>
+              <div class="dash-card-sub">Normal range</div>
+            </div>
+            <div class="dash-card">
+              <div class="dash-card-label">Next Service</div>
+              <div class="dash-card-val bad" style="font-size:1rem;margin-top:0.3rem">Schedule</div>
+              <div class="dash-card-sub bad">Overdue 14d</div>
+            </div>
+            <div class="dash-bar-wrap">
+              <div class="dash-bar-label">Motor Current Draw — Last 7 Days (mA)</div>
+              <div class="dash-bars">
+                <div class="dash-bar" style="height:55%"></div>
+                <div class="dash-bar" style="height:58%"></div>
+                <div class="dash-bar" style="height:62%"></div>
+                <div class="dash-bar" style="height:60%"></div>
+                <div class="dash-bar" style="height:70%"></div>
+                <div class="dash-bar hi" style="height:82%"></div>
+                <div class="dash-bar hi" style="height:88%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- User Journey -->
+    <div class="col-label fade-in" style="padding: 2rem 3.5rem 0; font-family: 'IBM Plex Mono', monospace; font-size: 0.65rem; letter-spacing: 0.16em; color: var(--orange); text-transform: uppercase; display: flex; align-items: center; gap: 0.6rem;">User Journey <span style="display:block;height:1px;width:40px;background:var(--orange);opacity:0.4;"></span></div>
+    <div class="journey fade-in">
+      <div class="journey-step">
+        <div class="step-num">STEP 01</div>
+        <div class="step-icon">📡</div>
+        <div class="step-title">Data Collection</div>
+        <p class="step-desc">Firmware logs motor current and vibration on every cycle. No new hardware. Minimal battery impact.</p>
+        <div class="step-arrow">→</div>
+      </div>
+      <div class="journey-step">
+        <div class="step-num">STEP 02</div>
+        <div class="step-icon">🧠</div>
+        <div class="step-title">AI Analysis</div>
+        <p class="step-desc">Cloud model compares signals against device baseline and fleet benchmarks. Anomaly score generated.</p>
+        <div class="step-arrow">→</div>
+      </div>
+      <div class="journey-step">
+        <div class="step-num">STEP 03</div>
+        <div class="step-icon">🔔</div>
+        <div class="step-title">Alert Triggered</div>
+        <p class="step-desc">Push notification sent when score crosses threshold. Plain language, no jargon. Action-oriented CTA.</p>
+        <div class="step-arrow">→</div>
+      </div>
+      <div class="journey-step">
+        <div class="step-num">STEP 04</div>
+        <div class="step-icon">🛠️</div>
+        <div class="step-title">Book Service</div>
+        <p class="step-desc">User taps to marketplace. One-tap booking with vetted tech, transparent pricing, same-week slots.</p>
+        <div class="step-arrow">→</div>
+      </div>
+      <div class="journey-step">
+        <div class="step-num">STEP 05</div>
+        <div class="step-icon">✅</div>
+        <div class="step-title">Health Restored</div>
+        <p class="step-desc">Score rebounds. History logged. User sees impact. Trust reinforced. Subscription renewed.</p>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="kpi-strip fade-in">
+      <div class="kpi-cell">
+        <div class="kpi-metric">↓ 40%</div>
+        <div class="kpi-name">Reduction in unexpected failure service calls</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-metric">+18%</div>
+        <div class="kpi-name">Subscription attach rate lift vs. control group</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-metric">4.6★</div>
+        <div class="kpi-name">Target CSAT score for maintenance-alert users</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-metric">$22</div>
+        <div class="kpi-name">Average maintenance revenue per service booking</div>
+      </div>
+    </div>
+
+    <!-- Deliverables -->
+    <div class="deliverables fade-in">
+      <span class="deliverables-label">Deliverables</span>
+      <span class="deliverable-tag">Product Vision Doc</span>
+      <span class="deliverable-tag">User Journey Map</span>
+      <span class="deliverable-tag">KPI Framework</span>
+      <span class="deliverable-tag">PRD</span>
+      <span class="deliverable-tag">Wireframes</span>
+    </div>
+
+  </section>
+
+
+  <!-- ══════════════════════════════════════════
+       PROJECT 2 — PRICING & BUNDLING
+  ══════════════════════════════════════════ -->
+  <section id="project-2" class="alt-bg">
+
+    <div class="section-header fade-in">
+      <div class="project-num">02</div>
+      <div class="section-meta">
+        <div class="section-tag">Monetization · Revenue Strategy · Go-to-Market</div>
+        <h2 class="section-title">Smart Access Pricing<br />& Bundling Strategy</h2>
+        <p class="section-subtitle">Design a product and pricing portfolio that captures value at every willingness-to-pay tier.</p>
+      </div>
+    </div>
+
+    <!-- Problem + Approach -->
+    <div class="content-grid fade-in">
+      <div class="content-col">
+        <div class="col-label">Business Problem</div>
+        <h3 class="col-heading">One-time hardware revenue doesn't build a durable business.</h3>
+        <p class="col-text">Smart home hardware margins are brutal — commoditized components, intense retail competition, and consumers who compare on price alone. The companies winning in this space have figured out that the hardware is the acquisition channel, not the profit center. Revenue and margin come from recurring subscriptions, premium add-ons, and enterprise contracts. The opportunity is to design a bundle architecture that meets customers where they are at purchase, then pulls them up the value ladder through genuine product quality — not dark patterns.</p>
+      </div>
+      <div class="content-col">
+        <div class="col-label">Strategic Approach</div>
+        <h3 class="col-heading">Anchor low, differentiate high, lock in with enterprise.</h3>
+        <p class="col-text">The pricing strategy runs three parallel tracks: a competitive entry-level hardware price that drives volume and activations; a mid-tier hardware bundle that bundles camera and alerts to lift average order value; and a monthly subscription tier that monetizes power users through AI automation and insights. Enterprise fleet management sits above all of it on a custom contract model, targeting property managers, dealerships, and logistics companies who manage dozens or hundreds of access points. Each tier is designed to feel complete — not artificially hobbled to force upgrades.</p>
+      </div>
+    </div>
+
+    <!-- Pricing Table -->
+    <div class="content-grid fade-in">
+      <div class="content-col">
+        <div class="col-label">Bundle Architecture</div>
+        <h3 class="col-heading">Four tiers, one cohesive product family</h3>
+        <table class="pricing-table">
+          <thead>
+            <tr>
+              <th>Tier</th>
+              <th>What's Included</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><div class="bundle-name">Basic</div><span class="tier-badge tier-basic">Starter</span></td>
+              <td>Garage opener + myQ mobile app access + standard scheduling</td>
+              <td><div class="bundle-price">$199</div></td>
+            </tr>
+            <tr>
+              <td><div class="bundle-name">Secure Home</div><span class="tier-badge tier-mid">Popular</span></td>
+              <td>Opener + smart camera + real-time alerts + delivery access window</td>
+              <td><div class="bundle-price">$299</div></td>
+            </tr>
+            <tr>
+              <td><div class="bundle-name">Pro Automation</div><span class="tier-badge tier-pro">Best Value</span></td>
+              <td>Full Secure Home package + AI health monitoring + voice automation + priority service</td>
+              <td><div class="bundle-price">$12/mo</div></td>
+            </tr>
+            <tr>
+              <td><div class="bundle-name">Enterprise</div><span class="tier-badge tier-ent">Fleet</span></td>
+              <td>Fleet access dashboard + admin controls + API access + dedicated CSM + SLA</td>
+              <td><div class="bundle-price">Custom</div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="content-col">
+        <div class="col-label">Revenue Model Logic</div>
+        <h3 class="col-heading">How each tier contributes to margin</h3>
+        <ul class="feature-list">
+          <li><span class="feat-dot"></span><strong>Basic ($199):</strong> Hardware at modest margin. Goal is activation volume and ecosystem entry. Funds future upsell attempts via push and in-app surface.</li>
+          <li><span class="feat-dot"></span><strong>Secure Home ($299):</strong> Camera accessory has ~55% gross margin. Bundle ASP lift of $100 with minimal incremental COGS. Strong retail story at Target and Costco.</li>
+          <li><span class="feat-dot"></span><strong>Pro Automation ($12/mo):</strong> SaaS-model recurring revenue. Near-100% gross margin on software features. Target 25% of activated hardware base on subscription within 18 months.</li>
+          <li><span class="feat-dot"></span><strong>Enterprise (Custom):</strong> Land and expand with a pilot deployment. Annual contracts. NRR target 115%+ as customers add access points and admin seats.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Strategy Blocks -->
+    <div class="strategy-grid fade-in">
+      <div class="strategy-block">
+        <div class="strategy-num">STRATEGY 01</div>
+        <h3 class="strategy-heading">Competitive Benchmarking</h3>
+        <p class="strategy-text">Map Chamberlain, Ring, and Arlo pricing across tiers. Identify where we're overpriced (hardware), underpriced (subscription), and differentiated (AI maintenance). Prioritize subscription price integrity over hardware race-to-bottom. Avoid the trap of discounting hardware to drive activation — that's a margin killer with no floor.</p>
+      </div>
+      <div class="strategy-block">
+        <div class="strategy-num">STRATEGY 02</div>
+        <h3 class="strategy-heading">A/B Pricing Experiment Plan</h3>
+        <p class="strategy-text">Run a structured experiment across three variables: subscription price point ($8 vs. $12 vs. $16/mo), trial length (7-day vs. 30-day), and feature gating for the health score. Measure conversion rate, retention at 90 days, and net revenue impact. Use Bayesian stopping rules so we don't wait 12 weeks for a signal — decisions in 3 to 4 weeks.</p>
+      </div>
+      <div class="strategy-block">
+        <div class="strategy-num">STRATEGY 03</div>
+        <h3 class="strategy-heading">Go-to-Market Sequencing</h3>
+        <p class="strategy-text">Launch Basic and Secure Home at retail first — drive hardware volume and app activations. Introduce Pro Automation subscription to the activated base six months post-launch, when users have experienced the product value. Enterprise motion runs in parallel through direct sales, targeting property management companies where the fleet dashboard has clearest ROI.</p>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="kpi-strip fade-in">
+      <div class="kpi-cell">
+        <div class="kpi-metric">$249</div>
+        <div class="kpi-name">Target ASP across hardware units in year one</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-metric">52%</div>
+        <div class="kpi-name">Blended gross margin target including subscription mix</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-metric">25%</div>
+        <div class="kpi-name">Subscription conversion rate from activated hardware base</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-metric">$380</div>
+        <div class="kpi-name">30-month customer lifetime value at Pro tier</div>
+      </div>
+    </div>
+
+    <!-- Deliverables -->
+    <div class="deliverables fade-in">
+      <span class="deliverables-label">Deliverables</span>
+      <span class="deliverable-tag">Pricing Strategy Doc</span>
+      <span class="deliverable-tag">Revenue Model Projection</span>
+      <span class="deliverable-tag">Competitive Benchmarking</span>
+      <span class="deliverable-tag">Go-to-Market Plan</span>
+      <span class="deliverable-tag">A/B Experiment Plan</span>
+    </div>
+
+  </section>
+
+
+  <!-- ══════════════════════════════════════════
+       PROJECT 3 — UNIFIED DASHBOARD
+  ══════════════════════════════════════════ -->
+  <section id="project-3">
+
+    <div class="section-header fade-in">
+      <div class="project-num">03</div>
+      <div class="section-meta">
+        <div class="section-tag">UX Design · Platform Strategy · Ecosystem Thinking</div>
+        <h2 class="section-title">Unified Smart Access<br />Dashboard</h2>
+        <p class="section-subtitle">One interface. Every door, gate, camera, and guest — fully under control.</p>
+      </div>
+    </div>
+
+    <!-- Problem + Vision -->
+    <div class="content-grid fade-in">
+      <div class="content-col">
+        <div class="col-label">UX Problem</div>
+        <h3 class="col-heading">Three devices, three apps, zero coherence.</h3>
+        <p class="col-text">A typical connected home customer has a myQ garage opener, a Ring camera on the front door, a gate controller from a third vendor, and a lockbox for package delivery. Managing access across all of them means context-switching between apps, no unified activity log, and no single place to grant guest access across the full perimeter. Every additional device added to the ecosystem should make the product more valuable — but right now, more devices means more friction. That's a design failure with serious churn implications.</p>
+      </div>
+      <div class="content-col">
+        <div class="col-label">Platform Vision</div>
+        <h3 class="col-heading">A control layer that scales with the home, not against it.</h3>
+        <p class="col-text">The unified dashboard isn't just a redesigned home screen. It's a platform decision — one that requires engineering investment in a device abstraction layer, partnerships or integrations with third-party hardware, and a UX system that can accommodate new device categories without constant redesign. Done well, it becomes the reason customers buy their second, third, and fourth devices from us rather than from Amazon or Google. The strategic moat is the control surface, not any single piece of hardware.</p>
+      </div>
+    </div>
+
+    <!-- Wireframe + Features -->
+    <div class="content-grid fade-in">
+      <div class="content-col">
+        <div class="col-label">Dashboard Wireframe — Key Screens</div>
+        <div class="wireframe">
+          <div class="wf-header">
+            <div class="wf-logo-block"></div>
+            <div class="wf-nav-items">
+              <div class="wf-nav-item"></div>
+              <div class="wf-nav-item"></div>
+              <div class="wf-nav-item"></div>
+            </div>
+          </div>
+          <div class="wf-body">
+            <div class="wf-sidebar">
+              <div class="wf-side-item active"><span class="wf-side-dot"></span>All Devices</div>
+              <div class="wf-side-item"><span class="wf-side-dot"></span>Activity Log</div>
+              <div class="wf-side-item"><span class="wf-side-dot"></span>Guest Access</div>
+              <div class="wf-side-item"><span class="wf-side-dot"></span>Delivery Windows</div>
+              <div class="wf-side-item"><span class="wf-side-dot"></span>Health Monitor</div>
+              <div class="wf-side-item"><span class="wf-side-dot"></span>Analytics</div>
+              <div class="wf-side-item"><span class="wf-side-dot"></span>Settings</div>
+            </div>
+            <div class="wf-main">
+              <div class="wf-device-row">
+                <div class="wf-device">
+                  <div class="wf-device-top">
+                    <div class="wf-device-icon">🚗</div>
+                    <div class="wf-device-name">Garage Door</div>
+                    <div class="wf-status-pill">Closed</div>
+                  </div>
+                  <div class="wf-score-bar"><div class="wf-score-fill" style="width:84%"></div></div>
+                  <div class="wf-score-label">Health: 84 / 100</div>
+                </div>
+                <div class="wf-device">
+                  <div class="wf-device-top">
+                    <div class="wf-device-icon">📷</div>
+                    <div class="wf-device-name">Front Camera</div>
+                    <div class="wf-status-pill">Live</div>
+                  </div>
+                  <div class="wf-score-bar"><div class="wf-score-fill" style="width:97%"></div></div>
+                  <div class="wf-score-label">Health: 97 / 100</div>
+                </div>
+                <div class="wf-device">
+                  <div class="wf-device-top">
+                    <div class="wf-device-icon">🔒</div>
+                    <div class="wf-device-name">Side Gate</div>
+                    <div class="wf-status-pill warn">Ajar</div>
+                  </div>
+                  <div class="wf-score-bar"><div class="wf-score-fill" style="width:62%"></div></div>
+                  <div class="wf-score-label">Health: 62 / 100</div>
+                </div>
+              </div>
+              <div class="wf-timeline">
+                <div class="wf-tl-label">Recent Activity</div>
+                <div class="wf-tl-items">
+                  <div class="wf-tl-item"><span class="wf-tl-dot2"></span><span class="wf-tl-time">9:42am</span>Garage opened — Alex (keypad)</div>
+                  <div class="wf-tl-item"><span class="wf-tl-dot2"></span><span class="wf-tl-time">9:18am</span>Package delivery window active — FedEx</div>
+                  <div class="wf-tl-item"><span class="wf-tl-dot2"></span><span class="wf-tl-time">8:05am</span>Garage closed — Auto-close (10 min rule)</div>
+                  <div class="wf-tl-item"><span class="wf-tl-dot2"></span><span class="wf-tl-time">7:52am</span>Front camera motion alert</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content-col">
+        <div class="col-label">Feature Set</div>
+        <h3 class="col-heading">What makes this more than a list of devices</h3>
+        <ul class="feature-list">
+          <li><span class="feat-dot"></span>Single control panel showing status, health score, and last event for every connected access point — garage, gate, camera, smart lock, delivery lockbox.</li>
+          <li><span class="feat-dot"></span>Real-time activity timeline that merges events across all devices into one chronological feed. Filter by device, user, or event type.</li>
+          <li><span class="feat-dot"></span>Guest access management with role-based permissions — full access, time-limited window, or single-use. Works across all devices from one screen.</li>
+          <li><span class="feat-dot"></span>Delivery access permissions that integrate with FedEx and UPS to auto-open a window during delivery, then close and notify.</li>
+          <li><span class="feat-dot"></span>Usage analytics showing weekly and monthly patterns — most active times, most frequent users, anomalous access events — exportable for security review.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Roadmap Prioritization -->
+    <div class="content-grid fade-in">
+      <div class="content-col">
+        <div class="col-label">Roadmap Prioritization</div>
+        <h3 class="col-heading">How to sequence a platform build</h3>
+        <ul class="feature-list">
+          <li><span class="feat-dot"></span><strong>Phase 1 (0–3 months):</strong> Unified device list and real-time status for first-party myQ hardware only. Establishes the design system and data model. Low engineering risk, high visual impact for users already on platform.</li>
+          <li><span class="feat-dot"></span><strong>Phase 2 (3–6 months):</strong> Activity log merge and guest access unification across devices. This is the feature with highest engagement impact — power users currently manage this manually.</li>
+          <li><span class="feat-dot"></span><strong>Phase 3 (6–12 months):</strong> Third-party device integrations via Works with myQ program. API published for partners. Ring, Yale, and Schlage are first-tier targets based on install base overlap.</li>
+          <li><span class="feat-dot"></span><strong>Phase 4 (12–18 months):</strong> Delivery access automation with carrier APIs. Analytics dashboard and data export for Pro and Enterprise tiers.</li>
+        </ul>
+      </div>
+      <div class="content-col">
+        <div class="col-label">Stakeholder Alignment Plan</div>
+        <h3 class="col-heading">Getting hardware, firmware, and product moving together</h3>
+        <p class="col-text" style="margin-bottom:1.2rem">A unified dashboard sounds like a design project. It isn't. It requires firmware changes to expose richer telemetry, a platform API that hardware partners can certify against, mobile engineering capacity, and a data infrastructure team to handle the event-merge pipeline at scale. Getting those four groups aligned on a single roadmap requires a few specific moves:</p>
+        <ul class="feature-list">
+          <li><span class="feat-dot"></span>Monthly joint planning session with firmware and mobile leads, not just emails. Block the time at the start of each quarter.</li>
+          <li><span class="feat-dot"></span>A shared success metric that all teams own: device attach rate per customer. Ties hardware, software, and partnerships to one number.</li>
+          <li><span class="feat-dot"></span>A public internal roadmap so firmware teams know what mobile needs six months ahead — no last-minute API surprises in either direction.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="kpi-strip fade-in">
+      <div class="kpi-cell">
+        <div class="kpi-metric">+34%</div>
+        <div class="kpi-name">Daily active user lift among multi-device households</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-metric">2.4×</div>
+        <div class="kpi-name">Device attach rate for users on unified dashboard vs. legacy app</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-metric">↓ 22%</div>
+        <div class="kpi-name">Churn reduction among users with 2+ connected devices</div>
+      </div>
+      <div class="kpi-cell">
+        <div class="kpi-metric">61%</div>
+        <div class="kpi-name">Feature adoption rate for guest access within 30 days of install</div>
+      </div>
+    </div>
+
+    <!-- Deliverables -->
+    <div class="deliverables-dark fade-in">
+      <div class="deliverables-dark-header">Deliverables</div>
+      <div class="deliverable-card">
+        <div class="deliverable-card-icon">🗺️</div>
+        <div class="deliverable-card-title">UX Flows</div>
+        <div class="deliverable-card-desc">End-to-end user flow diagrams covering device onboarding, guest access granting, and delivery window setup.</div>
+      </div>
+      <div class="deliverable-card">
+        <div class="deliverable-card-icon">📐</div>
+        <div class="deliverable-card-title">Wireframes (Figma-ready)</div>
+        <div class="deliverable-card-desc">Annotated lo-fi wireframes for the dashboard home, activity log, and guest management screens.</div>
+      </div>
+      <div class="deliverable-card">
+        <div class="deliverable-card-icon">🗓️</div>
+        <div class="deliverable-card-title">Roadmap Prioritization</div>
+        <div class="deliverable-card-desc">Four-phase release plan with effort/impact scoring and engineering dependency mapping across firmware and mobile.</div>
+      </div>
+      <div class="deliverable-card">
+        <div class="deliverable-card-icon">📊</div>
+        <div class="deliverable-card-title">Success Metrics</div>
+        <div class="deliverable-card-desc">KPI framework covering DAU, device attach rate, churn, and feature adoption — split by leading and lagging indicators.</div>
+      </div>
+      <div class="deliverable-card">
+        <div class="deliverable-card-icon">🤝</div>
+        <div class="deliverable-card-title">Stakeholder Alignment Plan</div>
+        <div class="deliverable-card-desc">Cross-functional alignment doc covering firmware, mobile, data, and partnerships — with shared success metrics and review cadence.</div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-left">
+      <div class="footer-logo">Smart Access<br />PM Portfolio</div>
+      <p class="footer-tagline">Three end-to-end case studies spanning AI product strategy, monetization design, and platform UX for the connected home access category.</p>
+    </div>
+    <div class="footer-right">
+      <div class="footer-label">Document</div>
+      <div class="footer-note">index.html + README.md<br />2024 Portfolio Work</div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll fade-in
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Nav active highlight
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 120) current = s.id;
+      });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + current ? 'var(--orange)' : '';
+      });
+    });
+
+    // GLOBAL RULE: All links stay inside this page — no new tabs, no external navigation
+    document.addEventListener('click', function (e) {
+      const link = e.target.closest('a');
+      if (!link) return;
+
+      // Force target to self — never open a new tab
+      link.setAttribute('target', '_self');
+      link.removeAttribute('rel');
+
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      // Handle anchor links with smooth scroll
+      if (href.startsWith('#')) {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          const offset = 80; // nav height
+          const top = target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+        return;
+      }
+
+      // Block any external URL — do nothing, stay on page
+      if (href.startsWith('http') || href.startsWith('//') || href.startsWith('mailto')) {
+        e.preventDefault();
+        return;
+      }
+    }, true);
+  </script>
+
+</body>
+</html>
