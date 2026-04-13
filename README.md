@@ -57,15 +57,4 @@ All KPIs in the portfolio are illustrative targets modeled on reasonable assumpt
 
 ---
 
-## If You're a Recruiter
 
-Each project section follows the same structure I'd use in a real product review:
-
-1. Problem statement — what's broken and why it matters
-2. Business rationale — why solving it is worth the investment
-3. Product strategy — the conceptual approach, not just a feature list
-4. Feature breakdown — what we actually build and how it works
-5. Metrics — how we know if it worked
-6. Visual artifacts — wireframes, dashboards, and flow maps
-
-That structure is deliberate. It's how I'd walk a team through a product decision.
