@@ -1,4 +1,4 @@
-# Smart Access PM Portfolio
+# Chamberlain PM Portfolio
 
 Three product management case studies for a connected home garage and access ecosystem. Built to show recruiters how I think across strategy, monetization, UX, and cross-functional execution.
 
